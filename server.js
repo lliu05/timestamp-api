@@ -3,7 +3,11 @@ var moment = require("moment");
 var query = require("querystring");
 var app = express();
 
-app.get('/message/:time', function(req, res) {
+app.get("/", function(req, res) {
+    res.send("Example Input: https://timestamp-ms.herokuapp.com/December%2015,%202015 ---OR--- https://timestamp-ms.herokuapp.com/1450137600")
+});
+
+app.get("/message/:time", function(req, res) {
     //console.log("works");
     var time = req.params.time;
     var parseTime = parseInt(time, 10);
