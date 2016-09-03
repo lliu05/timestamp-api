@@ -26,4 +26,4 @@ app.get('/message/:time', function(req, res) {
     res.send(result);
 });
 
-app.listen(8000);
+app.listen(process.env.PORT);
