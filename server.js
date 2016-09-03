@@ -20,7 +20,7 @@ app.get("/message/:time", function(req, res) {
     if (!parseTime) {
         var dateReadble = query.unescape(time);
         //convert input to unix format
-        time = moment(dateReadble).valueOf()/100;
+        time = moment(dateReadble).valueOf()/1000;
     }
     
     var date = moment.unix(time);
