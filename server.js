@@ -4,7 +4,7 @@ var query = require("querystring");
 var app = express();
 
 app.get("/", function(req, res) {
-    res.send(query.escape("Example Input --- <https://luna-timestamp-api.herokuapp.com/message/December%2015,%202015> ---OR--- <https://luna-timestamp-api.herokuapp.com/message/1450137600>"));
+    res.send("Example Input --- https://luna-timestamp-api.herokuapp.com/message/December%2015,%202015 --- OR --- https://luna-timestamp-api.herokuapp.com/message/1450137600");
 });
 
 app.get("/message/:time", function(req, res) {
