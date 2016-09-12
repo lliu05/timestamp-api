@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, 'static/html')));
 app.use(express.static(path.join(__dirname, 'static/css')));
 
 app.get('/message/:time', function(req, res) {
-    //console.log("works");
+    //expect "time" to be unix time form
     var time = req.params.time;
     var parseTime = parseInt(time, 10);
     var result = {
