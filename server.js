@@ -23,7 +23,7 @@ app.get('/message/:time', function(req, res) {
         time = moment(dateReadble, "MMMM D, YYYY", true).valueOf()/1000;
     }
     
-    //retrive info based on unix time
+    //retrieve info based on unix time
     var date = moment.unix(time);
     result["unix"] = time.toString();
     result["natural"] = date.format("MMMM D, YYYY");
