@@ -1,14 +1,9 @@
-var express = require("express");
-var path = require("path");
+express = require("express");
 var moment = require("moment");
 var query = require("querystring");
 var app = express();
 
-app.use(express.static(path.join(__dirname, 'static/html')));
-app.use(express.static(path.join(__dirname, 'static/css')));
-
-app.get("/message/:time", function(req, res) {
-    //console.log("works");
+app.get('/message/:time', function(req, res) {
     var time = req.params.time;
     var parseTime = parseInt(time, 10);
     var result = {
@@ -18,16 +13,20 @@ app.get("/message/:time", function(req, res) {
 
     //not unix format input, eg: December%2015,%202015
     if (!parseTime) {
-        var dateReadble = query.unescape(time);
         //convert input to unix format
-        time = moment(dateReadble).valueOf()/1000;
+        var dateReadble = query.unescape(time);
+        time = moment(dateReadble, "MMMM D, YYYY", true).valueOf()/1000;
     }
     
-    var date = moment.unix(time);
-    result["unix"] = time;
-    result["natural"] = date.format("MMMM D, YYYY");
     
+    result["unix"] = time;
+    
+    //check if date valid
+    var date = moment.unix(time);
+    if (time) result["natural"] = date.format("MMMM D, YYYY");
+    else result["natural"] = null;
+
     res.send(result);
 });
 
-app.listen(process.env.PORT);
+app.listen(8080);
