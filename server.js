@@ -3,6 +3,9 @@ var moment = require("moment");
 var query = require("querystring");
 var app = express();
 
+app.use(express.static(path.join(__dirname, 'static/html')));
+app.use(express.static(path.join(__dirname, 'static/css')));
+
 app.get('/message/:time', function(req, res) {
     //console.log("works");
     var time = req.params.time;
