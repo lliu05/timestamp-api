@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, 'static/html')));
 app.use(express.static(path.join(__dirname, 'static/css')));
 
 app.get('/message/:time', function(req, res) {
-    //expect "time" to be unix time form
+    //expect "time" to be in unix time form
     var time = req.params.time;
     var parseTime = parseInt(time, 10);
     var result = {
@@ -23,12 +23,13 @@ app.get('/message/:time', function(req, res) {
         time = moment(dateReadble, "MMMM D, YYYY", true).valueOf()/1000;
     }
     
+    //retrive info based on unix time
+    var date = moment.unix(time);
     result["unix"] = time.toString();
+    result["natural"] = date.format("MMMM D, YYYY");
     
     //check if date validate
-    var date = moment.unix(time);
-    if (time) result["natural"] = date.format("MMMM D, YYYY");
-    else {
+    if (!result["unix"] || result["natural"] == "Invalid date") {
         result["unix"] = null;
         result["natural"] = null;
     }
