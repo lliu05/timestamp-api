@@ -1,9 +1,10 @@
-express = require("express");
+var express = require("express");
 var moment = require("moment");
 var query = require("querystring");
 var app = express();
 
 app.get('/message/:time', function(req, res) {
+    //console.log("works");
     var time = req.params.time;
     var parseTime = parseInt(time, 10);
     var result = {
@@ -18,14 +19,16 @@ app.get('/message/:time', function(req, res) {
         time = moment(dateReadble, "MMMM D, YYYY", true).valueOf()/1000;
     }
     
+    result["unix"] = time.toString();
     
-    result["unix"] = time;
-    
-    //check if date valid
+    //check if date validate
     var date = moment.unix(time);
     if (time) result["natural"] = date.format("MMMM D, YYYY");
-    else result["natural"] = null;
-
+    else {
+        result["unix"] = null;
+        result["natural"] = null;
+    }
+    
     res.send(result);
 });
 
