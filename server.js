@@ -3,9 +3,8 @@ var moment = require("moment");
 var query = require("querystring");
 var app = express();
 
-app.get("/", function(req, res) {
-    res.send("Example Input --- https://luna-timestamp-api.herokuapp.com/message/December%2015,%202015 --- OR --- https://luna-timestamp-api.herokuapp.com/message/1450137600");
-});
+app.use(express.static(path.join(__dirname, 'static/html')));
+app.use(express.static(path.join(__dirname, 'static/css')));
 
 app.get("/message/:time", function(req, res) {
     //console.log("works");
